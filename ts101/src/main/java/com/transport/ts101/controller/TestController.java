@@ -1,15 +1,15 @@
 package com.transport.ts101.controller;
 
+import com.transport.ts101.dto.HttpResponse;
+import com.transport.ts101.model.UserMaster;
 import com.transport.ts101.repository.*;
+import com.transport.ts101.service.IUserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +22,9 @@ public class TestController {
     @Autowired
     private DriveHistoryRepository repository;
 
+    @Autowired
+    private IUserService userService;
+
     @GetMapping(value={"/GetData"})
     public ResponseEntity<List<?>> getData() throws Exception {
         try {
@@ -29,6 +32,18 @@ public class TestController {
             List<?> res = repository.findAll();
             LOGGER.info("Data fetched successfully.......");
             return new ResponseEntity<>(res, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PostMapping(value={"/authenticate"})
+    public ResponseEntity<HttpResponse> authenticate(@RequestBody UserMaster userMaster) throws Exception {
+        try {
+            LOGGER.info("Fetching Data.......");
+            HttpResponse httpResponse = userService.authenticateUser(userMaster);
+            LOGGER.info("Data fetched successfully.......");
+            return new ResponseEntity<>(httpResponse, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
         }

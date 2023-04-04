@@ -30,6 +30,10 @@ public class UserMaster implements Serializable {
     @Column(name="address")
     private String address;
 
+    @Column(name="password")
+    private String password;
+
+
     @Column(name="mobile")
     private Integer mobile;
 
