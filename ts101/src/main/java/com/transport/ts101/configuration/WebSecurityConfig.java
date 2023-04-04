@@ -57,7 +57,7 @@ public class WebSecurityConfig {
         http.cors().and().csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/authenticate","/api/auth/**","/Token/**", "/swagger-ui.html/**", "/swagger-resources/**","/v2/api-docs/**","/webjars/springfox-swagger-ui/***").permitAll()
+                .authorizeRequests().antMatchers("/user/authenticate","/api/auth/**","/Token/**", "/swagger-ui.html/**", "/swagger-resources/**","/v2/api-docs/**","/webjars/springfox-swagger-ui/***").permitAll()
                 .antMatchers("/api/test/**","/Token/**", "/swagger-ui.html/**", "/swagger-resources/**","/v2/api-docs/**","/webjars/springfox-swagger-ui/***").permitAll()
                 .anyRequest().authenticated();
 

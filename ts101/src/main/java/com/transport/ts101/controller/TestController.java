@@ -37,16 +37,6 @@ public class TestController {
         }
     }
 
-    @PostMapping(value={"/authenticate"})
-    public ResponseEntity<HttpResponse> authenticate(@RequestBody UserMaster userMaster) throws Exception {
-        try {
-            LOGGER.info("Fetching Data.......");
-            HttpResponse httpResponse = userService.authenticateUser(userMaster);
-            LOGGER.info("Data fetched successfully.......");
-            return new ResponseEntity<>(httpResponse, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
-    }
+
 
 }
